@@ -1,8 +1,8 @@
 {
   "body": "{\"message\": \"hello world\"}",
-  "resource": "/hello",
-  "path": "/hello",
-  "httpMethod": "GET",
+  "resource": "/{proxy+}",
+  "path": "/path/to/resource",
+  "httpMethod": "POST",
   "isBase64Encoded": false,
   "queryStringParameters": {
     "foo": "bar"
@@ -53,8 +53,8 @@
       "userAgent": "Custom User Agent String",
       "user": null
     },
-    "path": "/prod/hello",
-    "resourcePath": "/hello",
+    "path": "/prod/path/to/resource",
+    "resourcePath": "/{proxy+}",
     "httpMethod": "POST",
     "apiId": "1234567890",
     "protocol": "HTTP/1.1"

@@ -1,0 +1,120 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Cloud-Challenge-SAM
+
+  Sample SAM Template for Cloud-Challenge-SAM
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+
+# S3 bucket to host website files (Root bucket)
+
+  MyWebsite:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      BucketName: my-fantastic-website1337
+
+# Setup Alias record to point all queries "jarraroptimized.com" -> Cloudfront distribution (which is backed by S3 Bucket)
+
+  MyRoute53Record:
+    Type: "AWS::Route53::RecordSetGroup"
+    Properties:
+      HostedZoneId: Z09737901JSU4JYWFTN25 
+      RecordSets:
+        - Name: jarraroptimized.com
+          Type: A
+          AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2 # Cloudfront ID (AWS Fixed)
+            DNSName: !GetAtt MyCloudFrontForWebsite.DomainName
+
+# HTTPS Certifcate via ACM // Useless for us since this creates a record in ue-west-1 instead of us-east-1 
+
+  # MyCertificate:
+  #   Type: AWS::CertificateManager::Certificate
+  #   Properties:
+  #     DomainName: jarraroptimized.com
+  #     ValidationMethod: DNS
+
+# Cloudfront distribution infront of S3 / TTL set to 0 to avoid cache issues
+# Used CF instead of direct S3 static website to avail HTTPS
+
+  MyCloudFrontForWebsite:
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - jarraroptimized.com
+        ViewerCertificate: 
+          AcmCertificateArn: "arn:aws:acm:us-east-1:026371852155:certificate/46e52ff6-d1a8-433a-a311-b9c2f927c7d5"
+          SslSupportMethod: sni-only
+        DefaultCacheBehavior:
+          ViewerProtocolPolicy: allow-all
+          TargetOriginId: my-fantastic-website1337.s3.eu-central-1.amazonaws.com
+          DefaultTTL: 0
+          MinTTL: 0
+          MaxTTL: 0
+          ForwardedValues:
+            QueryString: false
+        Origins:
+          - DomainName: my-fantastic-website1337.s3.eu-central-1.amazonaws.com
+            Id: my-fantastic-website1337.s3.eu-central-1.amazonaws.com
+            CustomOriginConfig:
+              OriginProtocolPolicy: match-viewer
+        Enabled: "true"
+        DefaultRootObject: index.html
+  
+# S3 Bucket policy to make bucket public
+
+  MyWebsitePolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref MyWebsite
+      PolicyDocument:
+        Statement:
+          -
+            Action:
+              - s3:*
+            Effect: Allow
+            Resource:
+              - !Sub arn:aws:s3:::${MyWebsite}
+              - !Sub arn:aws:s3:::${MyWebsite}/*
+            Principal:
+              AWS:
+                - '*'
+
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hello
+            Method: get
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  HelloWorldApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  HelloWorldFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt HelloWorldFunction.Arn
+  HelloWorldFunctionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt HelloWorldFunctionRole.Arn

@@ -11,6 +11,6 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': '*'
         },
-        'body': json.dumps('Hello from GET function, CORS working!')
+        'body': json.dumps({"count":2})
     }
 

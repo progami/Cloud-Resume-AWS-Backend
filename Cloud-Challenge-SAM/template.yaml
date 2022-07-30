@@ -90,20 +90,49 @@ Resources:
               AWS:
                 - '*'
 
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
     Properties:
-      CodeUri: hello_world/
-      Handler: app.lambda_handler
+      TableName: cloud-resume-challenge
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
+
+  GetFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: get-function/
+      Handler: app.get_function
       Runtime: python3.8
       Architectures:
         - x86_64
       Events:
-        HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+        RandomGet:
+          Type: Api 
           Properties:
-            Path: /hello
+            Path: /get
             Method: get
+
+  PutFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: put-function/
+      Handler: app.put_function
+      Runtime: python3.8
+      Architectures:
+        - x86_64
+      Events:
+        RandomPut:
+          Type: Api 
+          Properties:
+            Path: /put
+            Method: get
+
+
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -111,10 +140,7 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   HelloWorldApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/get/"
+  GetFunction:
     Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+    Value: !GetAtt GetFunction.Arn

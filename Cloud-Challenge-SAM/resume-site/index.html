@@ -2,6 +2,9 @@
 <head>
 
     <script>
+        // Update visitor count+=1
+        fetch('https://rmybrpuwog.execute-api.eu-central-1.amazonaws.com/Prod/put')
+        // get data from get function api call - it further fetches from dynamodb backend
         fetch('https://rmybrpuwog.execute-api.eu-central-1.amazonaws.com/Prod/get')
             .then(response => response.json())
             .then((data) => {

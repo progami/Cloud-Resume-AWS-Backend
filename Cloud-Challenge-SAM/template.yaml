@@ -102,11 +102,15 @@ Resources:
         - AttributeName: "ID"
           KeyType: "HASH"
 
+
   GetFunction:
     Type: AWS::Serverless::Function 
     Properties:
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: cloud-resume-challenge
       CodeUri: get-function/
-      Handler: app.get_function
+      Handler: get.get_function
       Runtime: python3.8
       Architectures:
         - x86_64
@@ -120,8 +124,11 @@ Resources:
   PutFunction:
     Type: AWS::Serverless::Function 
     Properties:
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: cloud-resume-challenge
       CodeUri: put-function/
-      Handler: app.put_function
+      Handler: put.put_function
       Runtime: python3.8
       Architectures:
         - x86_64

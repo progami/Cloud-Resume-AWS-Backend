@@ -11,7 +11,3 @@
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      - name: test get-function
-        run: cd Cloud-Challenge-SAM/get-function && go test -v ./ && cd ../../
-      - name: test put-function
-        run: cd Cloud-Challenge-SAM/put-function && go test -v ./ && cd ../../

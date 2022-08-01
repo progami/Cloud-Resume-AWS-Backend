@@ -4,9 +4,9 @@
 
 https://cloudresumechallenge.dev/docs/the-challenge/aws/
 
-Super helpful video series by open up to the cloud on the cloud resume challenge, this has some minor differences i.e. Go is used but provides a solid foundation
+Helpful video series by Open up to the cloud
 
-https://www.youtube.com/watch?v=e7vZe7qZFmE&list=PLEk97Q5Nj5oesA1WNk7DzaUpZUnCsQFVQ&index=1&ab_channel=OpenUpTheCloud
+https://youtu.be/e7vZe7qZFmE
 
 Following stack is followed in this implementation of the cloud resume challenge
 

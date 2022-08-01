@@ -6,9 +6,9 @@ https://cloudresumechallenge.dev/docs/the-challenge/aws/
 
 Following stack is followed in this implementation of the cloud resume challenge
 
-- HTML, CSS, JS
+- HTML, CSS, JS (Frontend)
 - Python
-- AWS Console, AWS CLI, AWS SDK (Boto3)
+- AWS Console, AWS CLI, AWS SDK/Boto3 
 - Route 53 (DNS)
 - DynamoDB (Database tier)
 - API Gateway / Lambda / AWS SAM (Backend)

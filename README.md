@@ -9,9 +9,11 @@ Helpful video series by Open up to the cloud: https://youtu.be/e7vZe7qZFmE
 Following stack is followed in this implementation of the cloud resume challenge
 
 - HTML, CSS, JS (Frontend)
-- Python
-- AWS Console, AWS CLI, AWS SDK/Boto3 
+- Python (Backend)
+- AWS Console, AWS CLI, AWS SDK/Boto3 (Backend) 
 - Route 53 (DNS)
+- Cloudfront (CDN)
+- ACM (SSL/HTTPS)
 - DynamoDB (Database tier)
 - API Gateway / Lambda / AWS SAM (Backend)
 - Cloudformation (IaC)

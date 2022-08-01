@@ -1,8 +1,9 @@
-  name: automation
-  on: push
-  env:
-    PYTHON_VERSION: 3.8.10
+name: automation
+on: push
+env:
+  PYTHON_VERSION: 3.8.10
 
+jobs:
   test-infra:
     runs-on: ubuntu-latest
     timeout-minutes: 2

@@ -19,4 +19,4 @@ Following stack is followed in this implementation of the cloud resume challenge
 - GitHub (Source Control)
 - Makefiles (Easier builds)
 
-## This project relies heavily on AWS-SAM for most implementations, i suggest you go and look it up seperately
+*This project relies heavily on AWS-SAM for most implementations, i suggest you go and look it up seperately*

@@ -4,9 +4,7 @@
 
 https://cloudresumechallenge.dev/docs/the-challenge/aws/
 
-Helpful video series by Open up to the cloud
-
-https://youtu.be/e7vZe7qZFmE
+Helpful video series by Open up to the cloud: https://youtu.be/e7vZe7qZFmE
 
 Following stack is followed in this implementation of the cloud resume challenge
 

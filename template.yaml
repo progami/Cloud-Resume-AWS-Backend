@@ -35,6 +35,19 @@ Resources:
             HostedZoneId: Z2FDTNDATAQYW2 # Cloudfront ID (AWS Fixed)
             DNSName: !GetAtt MyCloudFrontForWebsite.DomainName
 
+# For www.jarraroptimized.com - same as above
+
+  wwwMyRoute53Record:
+    Type: "AWS::Route53::RecordSetGroup"
+    Properties:
+      HostedZoneId: Z09737901JSU4JYWFTN25 
+      RecordSets:
+        - Name: www.jarraroptimized.com
+          Type: A
+          AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2 # Cloudfront ID (AWS Fixed)
+            DNSName: !GetAtt MyCloudFrontForWebsite.DomainName
+
 # HTTPS Certifcate via ACM // Useless for us since this creates a record in ue-west-1 instead of us-east-1 
 
   # MyCertificate:
@@ -52,8 +65,9 @@ Resources:
       DistributionConfig:
         Aliases:
           - jarraroptimized.com
+          - www.jarraroptimized.com
         ViewerCertificate: 
-          AcmCertificateArn: "arn:aws:acm:us-east-1:026371852155:certificate/46e52ff6-d1a8-433a-a311-b9c2f927c7d5"
+          AcmCertificateArn: "arn:aws:acm:us-east-1:026371852155:certificate/f4c5007d-d8eb-4726-b1a5-93ec0fde266f"
           SslSupportMethod: sni-only
         DefaultCacheBehavior:
           ViewerProtocolPolicy: allow-all
@@ -138,16 +152,3 @@ Resources:
           Properties:
             Path: /put
             Method: get
-
-
-
-Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  HelloWorldApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/get/"
-  GetFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt GetFunction.Arn

@@ -1,6 +1,5 @@
 import os
 from unittest import TestCase
-
 import boto3
 import requests
 

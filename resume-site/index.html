@@ -1,5 +1,20 @@
 <!-- Custom JS for calling API Gateway -->
+<p>
+    <script>
+                        // Update visitor count+=1
+                        fetch('https://rmybrpuwog.execute-api.eu-central-1.amazonaws.com/Prod/put')
+                        // get data from get function api call - it further fetches from dynamodb backend
+                        fetch('https://rmybrpuwog.execute-api.eu-central-1.amazonaws.com/Prod/get')
+                            .then(response => response.json())
+                            .then((data) => {
+                                document.getElementById('replaceme').innerText = data.count
+                            })
+                    </script>
+    </p>
+
+
 <p>&nbsp;</p>
+
 <!-- ######## This is a comment, visible only in the source editor  ######## -->
 <h1 style="color: #4485b8; text-align: center;"><span style="background-color: #4485b8; color: #ffffff; padding: 0 5px;">Jarrar Amjad, AWS CSA-Associate, BE(CE) NUST</span></h1>
 <p style="text-align: center;"><strong>Cloud Architect - DevOps Enthusiast</strong></p>

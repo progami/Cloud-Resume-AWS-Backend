@@ -70,7 +70,7 @@ Resources:
           AcmCertificateArn: "arn:aws:acm:us-east-1:026371852155:certificate/f4c5007d-d8eb-4726-b1a5-93ec0fde266f"
           SslSupportMethod: sni-only
         DefaultCacheBehavior:
-          ViewerProtocolPolicy: allow-all
+          ViewerProtocolPolicy: redirect-to-https # HTTPS Only
           TargetOriginId: my-fantastic-website1337.s3.eu-central-1.amazonaws.com
           DefaultTTL: 0
           MinTTL: 0

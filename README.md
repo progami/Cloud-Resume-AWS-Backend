@@ -2,7 +2,7 @@
 
 ## This repo is based on the cloud resume challenge by Forrest Brazeal
 
-## www.jarraroptimized.com, jarraroptimized.com
+## www.jarraroptimized.com
 
 https://cloudresumechallenge.dev/docs/the-challenge/aws/
 

@@ -2,6 +2,8 @@
 
 ## This repo is based on the cloud resume challenge by Forrest Brazeal
 
+## www.jarraroptimized.com, jarraroptimized.com
+
 https://cloudresumechallenge.dev/docs/the-challenge/aws/
 
 Helpful video series by Open up to the cloud

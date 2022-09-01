@@ -13,6 +13,9 @@ Helpful video series by Open up to the cloud
 
 ![UI](imgs/UI.png)
 
+- implemented using HUGO
+- https://github.com/progami/Hugo-Static-Website-JarrarOptimized
+
 ## Infrastructure (Backend)
 
 ![My Image](imgs/CF-Template.png)
